@@ -21,13 +21,8 @@
         <li
           class="nav-item selectLang d-flex align-items-center justify-content-center"
         >
-          <select
-            @click.prevent="changeLang"
-            @change="changeLang"
-            class=""
-            href="#"
-          >
-            <option selected value="tr">TR</option>
+          <select v-model="language" @change="changeLang()" class="" href="#">
+            <option value="tr">TR</option>
             <option value="en">EN</option>
           </select>
         </li>
@@ -43,11 +38,16 @@ export default {
     };
   },
   methods: {
-    changeLang(e) {
-      this.language = e.target.value;
+    changeLang() {
       localStorage.setItem("lang", this.language);
       window.location.reload();
     },
+  },
+  created() {
+    if (localStorage.getItem("lang") == null) {
+      localStorage.setItem("lang", "tr");
+    }
+    this.language = localStorage.getItem("lang");
   },
 };
 </script>
