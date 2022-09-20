@@ -1,0 +1,63 @@
+<template>
+  <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow mb-5 px-5">
+    <a class="navbar-brand" href="#">Ubit </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item" tag="li">
+          <router-link class="nav-link" to="/home" tag="a">
+            Anasayfa
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" to="/about" tag="a">
+            Hakkımda
+          </router-link>
+        </li>
+      </ul>
+      <ul class="navbar-nav my-lg-0 ms-auto">
+        <li class="nav-item mx-3">
+          <a @click.prevent="logout" class="nav-link" href="#">Çıkış Yap</a>
+        </li>
+        <li
+          class="nav-item selectLang d-flex align-items-center justify-content-center"
+        >
+          <select
+            @click.prevent="changeLang"
+            @change="changeLang"
+            class=""
+            href="#"
+          >
+            <option selected value="tr">TR</option>
+            <option value="en">EN</option>
+          </select>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</template>
+<script>
+export default {
+  data() {
+    return {
+      language: null,
+    };
+  },
+  methods: {
+    changeLang(e) {
+      this.language = e.target.value;
+      localStorage.setItem("lang", this.language);
+      window.location.reload();
+    },
+  },
+};
+</script>
+<style scoped>
+.selectLang select {
+  border: none;
+  color: #fff;
+  background: transparent;
+}
+.selectLang select option {
+  background: #000;
+}
+</style>
