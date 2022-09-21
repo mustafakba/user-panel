@@ -5,18 +5,20 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" tag="li">
           <router-link class="nav-link" to="/home" tag="a">
-            Anasayfa
+            {{ $t("message.home") }}
           </router-link>
         </li>
         <li class="nav-item">
           <router-link class="nav-link" to="/about" tag="a">
-            Hakkımda
+            {{ $t("message.about") }}
           </router-link>
         </li>
       </ul>
       <ul class="navbar-nav my-lg-0 ms-auto">
         <li class="nav-item mx-3">
-          <a @click.prevent="logout" class="nav-link" href="#">Çıkış Yap</a>
+          <a @click.prevent="logout" class="nav-link" href="#">{{
+            $t("message.logout")
+          }}</a>
         </li>
         <li
           class="nav-item selectLang d-flex align-items-center justify-content-center"

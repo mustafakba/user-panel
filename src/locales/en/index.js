@@ -2,10 +2,11 @@
 
 const messages ={
         message:{
-            about : 'about',
-            home : 'home',
+            about : 'About',
+            home : 'Home',
             haveAccount :'I have a account',
-            logout:'log out',
+            login:'Login',
+            logout:'Log Out',
             mailAdress:'Mail Adress',
             password :'Password',
             passwordNumberReqiured : 'your password must consist of numbers',
@@ -14,9 +15,10 @@ const messages ={
             passwordCharacters : 'characters ',
             passwordControl:'Must contain at least 3 characters',
             passwordSameAs:'Passwords are not the same',
-            register :'register',
+            register :'Register',
             required :'This field is required',
             signIn :'Sign In',
+            signUp:'Sign Up',
             validEmail :'please enter valid e-mail address',
         }
     }

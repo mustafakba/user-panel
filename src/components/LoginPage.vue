@@ -3,7 +3,7 @@
     <div
       class="container d-flex align-items-center text-danger flex-column justify-content-center"
     >
-      <h4>Ubit | Giriş Yap</h4>
+      <h4>Ubit | {{ $t("message.signIn") }}</h4>
       <form
         @submit.prevent="onSubmit"
         class="d-flex flex-column align-items-center justify-content-center"
@@ -14,7 +14,7 @@
             v-model="$v.email.$model"
             class="input"
             type="email"
-            placeholder="Mail Adresinizi Giriniz"
+            placeholder="E-mail adresinizi giriniz"
           />
           <small
             v-if="!$v.email.required && errorControl"
@@ -65,9 +65,11 @@
           type="submit"
           class="btn btn-primary btn-block mb-2"
         >
-          Giriş Yap
+          {{ $t("message.login") }}
         </button>
-        <router-link to="/register" class="text-secondary">Üye Ol </router-link>
+        <router-link to="/register" class="text-secondary"
+          >{{ $t("message.signUp") }}
+        </router-link>
       </form>
     </div>
   </div>

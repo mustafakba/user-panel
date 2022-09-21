@@ -3,7 +3,7 @@
     <div
       class="container d-flex align-items-center text-danger flex-column justify-content-center"
     >
-      <h4>Ubit | Kayıt Ol</h4>
+      <h4>Ubit | {{ $t("message.signUp") }}</h4>
       <form
         @submit.prevent="onSubmit"
         class="d-flex flex-column align-items-center justify-content-center"
@@ -106,11 +106,11 @@
           class="btn btn-primary btn-block mb-2"
         >
           <!-- {{ isUser ? "Giriş Yap" : "Kayıt Ol" }} -->
-          Kayıt Ol
+          {{ $t("message.signUp") }}
         </button>
         <router-link to="/" class="text-secondary">
           <!-- {{ isUser ? "Üye değilim" : "Üyeliğim var" }} -->
-          Giriş Yap
+          {{ $t("message.signIn") }}
         </router-link>
       </form>
     </div>

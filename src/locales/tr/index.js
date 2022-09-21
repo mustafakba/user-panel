@@ -2,9 +2,10 @@
 const messages ={
         message:{
             about : 'Hakkımızda',
-            required :'Bu alan zorunludur',
             home : 'Anasayfa',
+            required :'Bu alan zorunludur',
             haveAccount :'Hesabım var',
+            login:'Giriş Yap',
             logout:'Çıkış Yap',
             mailAdress:'Mail Adress',
             password :'Şifre',
@@ -15,6 +16,7 @@ const messages ={
             passwordSameAs:'Şifreler uyuşmuyor',
             register :'Kayıt Ol',
             signIn :'Giriş Yap ',
+            signUp:'Üye Ol',
             validEmail :'Lütfen geçerli bir mail adresi giriniz',
         }
     }
