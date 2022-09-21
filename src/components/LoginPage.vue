@@ -122,17 +122,6 @@ export default {
     onSubmit() {
       this.errorControl = true;
       let vm = this.$v.repassword.sameAs;
-      if (
-        vm == true &&
-        this.password.length <= 6 &&
-        this.password.length >= 3
-      ) {
-        console.log("böyle olduğunda submit gönder");
-        console.log("user : ", this.user);
-      } else {
-        console.log("böyle olduğunda submit gönderme");
-        this.errorControl = true;
-      }
     },
   },
 };
