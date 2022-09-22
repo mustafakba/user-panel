@@ -33,7 +33,7 @@ const store = new Vuex.Store({
       },
 
     login({ commit },authData) {
-      axios.post(
+     return axios.post(
           "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAyTPu80Gn-QT3Phb7fomSc-d6sFkrn1mw",
           {
             email: authData.email,
@@ -48,7 +48,11 @@ const store = new Vuex.Store({
     },
     // logout({ commit, dispatch, state }) {},
   },
-  getters: {},
+  getters: {
+    isAuthenticated(state){
+        return state.token !== ""
+    }
+  },
 });
 
 export default store;
