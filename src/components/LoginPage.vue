@@ -29,7 +29,7 @@
         </div>
         <div class="d-flex content-center flex-column m-2">
           <input
-            v-model="password"
+            v-model="$v.password.$model"
             class="input"
             type="password"
             placeholder="Şifrenizi Giriniz"
@@ -94,8 +94,8 @@ export default {
       isUser: false,
       errorControl: false,
       user: {
-        email: this.email,
-        password: this.password,
+        email: null,
+        password: null,
       },
     };
   },
@@ -121,7 +121,10 @@ export default {
   methods: {
     onSubmit() {
       this.errorControl = true;
-      let vm = this.$v.repassword.sameAs;
+      this.$store.dispatch("login", {
+        email: this.email,
+        password: this.password,
+      });
     },
   },
 };

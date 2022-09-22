@@ -29,7 +29,7 @@
         </div>
         <div class="d-flex content-center flex-column m-2">
           <input
-            v-model="password"
+            v-model="$v.password.$model"
             class="input"
             type="password"
             placeholder="Şifrenizi Giriniz"
@@ -135,10 +135,6 @@ export default {
       repassword: null,
       isUser: false,
       errorControl: false,
-      user: {
-        email: this.email,
-        password: this.password,
-      },
     };
   },
   validations: {
@@ -149,33 +145,25 @@ export default {
     password: {
       required,
       numeric,
-      minLength: minLength(3),
-      maxLength: maxLength(7),
+      minLength: minLength(6),
+      maxLength: maxLength(9),
     },
     repassword: {
       required,
       numeric,
-      minLength: minLength(3),
-      maxLength: maxLength(7),
+      minLength: minLength(6),
+      maxLength: maxLength(9),
       sameAs: sameAs("password"),
     },
   },
   methods: {
     onSubmit() {
       this.errorControl = true;
-      let vm = this.$v.repassword.sameAs;
-      let password = password;
-      if (
-        vm == true &&
-        this.password.length <= 6 &&
-        this.password.length >= 3
-      ) {
-        console.log("böyle olduğunda submit gönder");
-        console.log(this.password.length);
-      } else {
-        console.log("böyle olduğunda submit gönderme");
-        this.errorControl = true;
-      }
+      // let vm = this.$v.repassword.sameAs;
+      this.$store.dispatch("signUp", {
+        email: this.email,
+        password: this.password,
+      });
     },
   },
 };

@@ -16,7 +16,7 @@ export const router = new VueRouter({
         },
         {
             path:'/about',
-            component :AboutPage
+            component :AboutPage,
         },
         {
             path:'/',
