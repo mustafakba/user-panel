@@ -4,21 +4,30 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" tag="li">
-          <router-link class="nav-link" to="/home" tag="a">
+          <router-link class="nav-link" :class="logoutClass" to="/home" tag="a">
             {{ $t("message.home") }}
           </router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/about" tag="a">
+          <router-link
+            class="nav-link"
+            :class="logoutClass"
+            to="/about"
+            tag="a"
+          >
             {{ $t("message.about") }}
           </router-link>
         </li>
       </ul>
       <ul class="navbar-nav my-lg-0 ms-auto">
         <li class="nav-item mx-3">
-          <a @click.prevent="logout" class="nav-link" href="#">{{
-            $t("message.logout")
-          }}</a>
+          <a
+            @click.prevent="logout"
+            :class="logoutClass"
+            class="nav-link"
+            href="#"
+            >{{ $t("message.logout") }}</a
+          >
         </li>
         <li
           class="nav-item selectLang d-flex align-items-center justify-content-center"
@@ -38,6 +47,13 @@ export default {
     return {
       language: null,
     };
+  },
+  computed: {
+    logoutClass() {
+      return {
+        "d-none": !this.$store.getters.isAuthenticated,
+      };
+    },
   },
   methods: {
     changeLang() {

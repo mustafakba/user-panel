@@ -121,10 +121,14 @@ export default {
   methods: {
     onSubmit() {
       this.errorControl = true;
-      this.$store.dispatch("login", {
-        email: this.email,
-        password: this.password,
-      });
+      this.$store
+        .dispatch("login", {
+          email: this.email,
+          password: this.password,
+        })
+        .then(() => {
+          this.$router.push("/home");
+        });
     },
   },
 };
