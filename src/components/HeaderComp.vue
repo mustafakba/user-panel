@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-dark bg-primary shadow mb-5 px-5">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-primary shadow mb-5 px-5">
     <a class="navbar-brand" href="#">Ubit </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
@@ -56,6 +56,10 @@ export default {
     },
   },
   methods: {
+    logout() {
+      this.$store.dispatch("logout");
+      this.$router.replace("/");
+    },
     changeLang() {
       localStorage.setItem("lang", this.language);
       window.location.reload();

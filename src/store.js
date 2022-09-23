@@ -46,7 +46,9 @@ const store = new Vuex.Store({
             console.log("kullanıcı girişi yapıldı")
         });
     },
-    // logout({ commit, dispatch, state }) {},
+    logout({ commit,}) {
+      commit("clearToken")
+    },
   },
   getters: {
     isAuthenticated(state){
