@@ -1,4 +1,5 @@
 # login-page
+Login ve Sign Up işlemleri yapılarak movie uygulamasi  
 
 ## Project setup
 ```
