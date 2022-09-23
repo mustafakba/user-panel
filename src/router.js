@@ -4,6 +4,7 @@ import AboutPage from './components/AboutPage.vue'
 import HomePage from './components/HomePage.vue'
 import LoginPage from './components/LoginPage.vue'
 import SignPage from './components/RegisterPage.vue'
+import store from '../src/store'
 
 
 Vue.use(VueRouter)
@@ -13,10 +14,29 @@ export const router = new VueRouter({
         {
             path:'/home',
             component:HomePage,
+            beforeEnter(to,from,next){
+                if(store.getters.isAuthenticated){
+                    next()
+                }
+                else{
+                    next("/")
+                }
+                
+            }
         },
         {
             path:'/about',
             component :AboutPage,
+            beforeEnter(to,from,next){
+                if(store.getters.isAuthenticated){
+                    next()
+                }
+                else{
+                    next("/")
+                }
+                
+
+            }
         },
         {
             path:'/',

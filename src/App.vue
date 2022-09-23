@@ -12,6 +12,9 @@ export default {
   components: {
     HeaderComp,
   },
+  created() {
+    this.$store.dispatch("initAuth");
+  },
 };
 </script>
 

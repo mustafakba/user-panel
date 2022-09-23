@@ -159,11 +159,15 @@ export default {
   methods: {
     onSubmit() {
       this.errorControl = true;
-      // let vm = this.$v.repassword.sameAs;
-      this.$store.dispatch("signUp", {
-        email: this.email,
-        password: this.password,
-      });
+      let vm = this.$v.repassword.sameAs;
+      if (vm) {
+        this.$store.dispatch("signUp", {
+          email: this.email,
+          password: this.password,
+        });
+      } else {
+        console.log("Şifreler uyuşmuyor.");
+      }
     },
   },
 };

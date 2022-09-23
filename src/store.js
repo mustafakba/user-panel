@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import { router } from "./router";
 
 Vue.use(Vuex);
 
@@ -17,6 +18,17 @@ const store = new Vuex.Store({
     },
   },
   actions: {
+    initAuth({commit}){
+      let token = localStorage.getItem("token");
+      if(token){
+        commit("setToken",token)
+        router.push("/home")
+      }
+      else{
+        router.push("/")
+        return false
+      }
+    },
     signUp({ commit },authData) {
         axios.post(
             "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAyTPu80Gn-QT3Phb7fomSc-d6sFkrn1mw",
@@ -33,7 +45,7 @@ const store = new Vuex.Store({
       },
 
     login({ commit },authData) {
-      axios.post(
+     return axios.post(
           "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAyTPu80Gn-QT3Phb7fomSc-d6sFkrn1mw",
           {
             email: authData.email,
@@ -43,12 +55,20 @@ const store = new Vuex.Store({
         )
         .then((response) => {
             commit("setToken",response.data.idToken)
-            console.log("kullanıcı girişi yapıldı")
-        });
+            localStorage.setItem("token",response.data.idToken)
+        
+          });
     },
-    // logout({ commit, dispatch, state }) {},
+    logout({ commit,}) {
+      commit("clearToken")
+      localStorage.removeItem("token")
+    },
   },
-  getters: {},
+  getters: {
+    isAuthenticated(state){
+        return state.token !== ""
+    }
+  },
 });
 
 export default store;
