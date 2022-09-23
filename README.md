@@ -1,4 +1,4 @@
-# login-page
+# Login & Sign Up - Movie App
 Login ve Sign Up işlemleri yapılarak movie uygulamasi  
 
 ## Project setup
