@@ -4,7 +4,8 @@ import AboutPage from './components/AboutPage.vue'
 import HomePage from './components/HomePage.vue'
 import LoginPage from './components/LoginPage.vue'
 import SignPage from './components/RegisterPage.vue'
-import store from '../src/store'
+import MovieDetail from './components/MovieDetail.vue'
+import store from './store/store'
 
 
 Vue.use(VueRouter)
@@ -45,7 +46,12 @@ export const router = new VueRouter({
         {
             path:'/register',
             component:SignPage
-        }
+        },
+         { path : "/:id", component : MovieDetail },
+         {
+            path : "*", redirect : "/home"
+         }
+    
     
     ],
     mode:'history'
