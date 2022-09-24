@@ -1,3 +1,47 @@
 <template>
-  <div>Homepage</div>
+  <div class="main-page">
+    <h3 class="text-white text-center p-3">Popüler Filmler</h3>
+    <div class="container">
+      <div class="row">
+        <MovieCard
+          class="col-sm-6 col-md-4 col-lg-3 col-sm-6-mx-2 p-5 card-height"
+          :movie="item"
+          v-for="(item, index) in movie"
+          :key="index"
+        ></MovieCard>
+
+        <MovieDetail></MovieDetail>
+      </div>
+    </div>
+  </div>
 </template>
+
+<script>
+import MovieCard from "./MovieCard.vue";
+import MovieDetail from "./MovieDetail.vue";
+
+export default {
+  components: {
+    MovieCard,
+    MovieDetail,
+  },
+  computed: {
+    movie: {
+      get() {
+        return this.$store.getters.getMovies;
+      },
+      set() {},
+    },
+  },
+};
+</script>
+
+<style scoped>
+.main-page {
+  background-color: black;
+}
+.card-height {
+  min-height: 100%;
+  max-height: 100%;
+}
+</style>
