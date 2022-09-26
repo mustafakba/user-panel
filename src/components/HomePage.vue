@@ -1,6 +1,7 @@
 <template>
   <div class="main-page">
-    <h3 class="text-white text-center p-3">Popüler Filmler</h3>
+    <h3 v-if="!isSubmit" class="text-white text-center p-3">Popüler Filmler</h3>
+    <h3 v-if="isSubmit" class="text-white text-center p-3">Arama Sonuçları</h3>
     <div class="container d-flex align-items-center justify-content-center">
       <div class="row">
         <MovieCard
@@ -18,6 +19,9 @@
 import MovieCard from "./MovieCard.vue";
 
 export default {
+  data() {
+    return {};
+  },
   components: {
     MovieCard,
   },
@@ -27,6 +31,9 @@ export default {
         return this.$store.getters.getMovies;
       },
       set() {},
+    },
+    isSubmit() {
+      return this.$store.state.isSubmit;
     },
   },
 };

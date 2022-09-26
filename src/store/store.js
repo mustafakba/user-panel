@@ -10,6 +10,7 @@ const store = new Vuex.Store({
     token: "",
     api_key: '2729e73997835bd6e2369217e8f102b1',
     movies: [],
+    isSubmit : false ,
   },
   mutations: {
     setToken(state, token) {
@@ -75,10 +76,32 @@ const store = new Vuex.Store({
           commit('setMovies', data.results);
         })
     },
+    searchMovies({ state,commit},payload){
+      let config=payload;
+      fetch(`https://api.themoviedb.org/3/search/multi?api_key=2729e73997835bd6e2369217e8f102b1&query=${config.text}`)
+        .then(data => data.json())
+        .then(data => {
+          commit('setMovies', data.results);
+        })
+        if(payload.text==null){
+          console.log("arama kısmı boş olmamalı")
+        }
+        state.isSubmit = payload.changeSubmitStatus;
+    },
+
+    getMovies({dispatch},payload){
+      if(payload){
+        dispatch("searchMovies",payload);
+        console.log("getMovies çalıştı")
+      }
+      else{
+        dispatch("fetchMovies")
+      }
+    },
     fetchMovie({state}, id){
       return fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${state.api_key}&language=tr-TR`)
         .then(data => data.json())
-    }
+    },
 
   },
   getters: {
