@@ -1,13 +1,15 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-import { router } from "./router";
+import { router } from "../router";
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
   state: {
     token: "",
+    api_key: '2729e73997835bd6e2369217e8f102b1',
+    movies: [],
   },
   mutations: {
     setToken(state, token) {
@@ -15,6 +17,9 @@ const store = new Vuex.Store({
     },
     clearToken(state) {
       state.token = "";
+    },
+    setMovies(state, payload){
+      state.movies = payload;
     },
   },
   actions: {
@@ -63,11 +68,27 @@ const store = new Vuex.Store({
       commit("clearToken")
       localStorage.removeItem("token")
     },
+        fetchMovies({state, commit}){
+      fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${state.api_key}&language=tr-TR&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`)
+        .then(data => data.json())
+        .then(data => {
+          commit('setMovies', data.results);
+        })
+    },
+    fetchMovie({state}, id){
+      return fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${state.api_key}&language=tr-TR`)
+        .then(data => data.json())
+    }
+
   },
   getters: {
     isAuthenticated(state){
         return state.token !== ""
-    }
+    },
+    getMovies(state){
+      return state.movies;
+    },
+    
   },
 });
 

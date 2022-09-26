@@ -7,7 +7,8 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 import Vuelidate from 'vuelidate'
 import i18n from './locales/index'
-import store from '../src/store'
+import store from './store/store'
+
 import axios from 'axios'
 import { BootstrapVue } from 'bootstrap-vue'
 
