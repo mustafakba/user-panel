@@ -1,6 +1,6 @@
 <template>
   <div class="d-flex position-relative">
-    <div @click.prevent="calisti" class="item" style="max-width: 18rem">
+    <div class="item" style="max-width: 18rem">
       <img
         :src="'https://image.tmdb.org/t/p/w500' + this.movie.poster_path"
         class=""
@@ -8,7 +8,9 @@
       <div class="overlay">
         <h3 class="text d-flex flex-column">
           {{ this.movie.original_title }}
-          <button class="btn btn-outline-light mt-2">Detay</button>
+          <button @click.prevent="calisti" class="btn btn-outline-light mt-2">
+            Detay
+          </button>
         </h3>
       </div>
     </div>
@@ -26,6 +28,7 @@ export default {
   methods: {
     calisti() {
       console.log(this.movie.id + "li elemana tiklandi");
+      this.$router.push("/" + this.movie.id);
     },
   },
   props: {

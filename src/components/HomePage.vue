@@ -9,8 +9,6 @@
           v-for="(item, index) in movie"
           :key="index"
         ></MovieCard>
-
-        <MovieDetail></MovieDetail>
       </div>
     </div>
   </div>
@@ -18,12 +16,10 @@
 
 <script>
 import MovieCard from "./MovieCard.vue";
-import MovieDetail from "./MovieDetail.vue";
 
 export default {
   components: {
     MovieCard,
-    MovieDetail,
   },
   computed: {
     movie: {
