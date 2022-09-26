@@ -18,6 +18,22 @@
             {{ $t("message.about") }}
           </router-link>
         </li>
+        <div
+          @submit.prevent
+          class="nav-item searchBar d-flex align-items-center justify-content-center"
+        >
+          <div
+            class="search-svg d-flex align-items-center justify-content-center"
+          >
+            <img src="../../src/img/searchIcon.svg" alt="" />
+            <input
+              @input="changeText"
+              type="text"
+              v-model="searchText"
+              placeholder="Search Movie , Actor"
+            />
+          </div>
+        </div>
       </ul>
       <ul class="navbar-nav my-lg-0 ms-auto">
         <li class="nav-item mx-3">
@@ -45,7 +61,9 @@
 export default {
   data() {
     return {
+      searchText: null,
       language: null,
+      isSubmit: false,
     };
   },
   computed: {
@@ -56,6 +74,14 @@ export default {
     },
   },
   methods: {
+    changeText() {
+      this.isSubmit = true;
+      this.$store.dispatch("getMovies", {
+        text: this.searchText,
+        changeSubmitStatus: this.isSubmit,
+      });
+      this.isSubmit = true;
+    },
     logout() {
       this.$store.dispatch("logout");
       this.$router.replace("/");
@@ -81,5 +107,28 @@ export default {
 }
 .selectLang select option {
   background: #000;
+}
+.searchBar input {
+  width: 300px;
+  height: 35px;
+  /* position: absolute; */
+}
+input {
+  padding: 0px 30px;
+  border: none;
+  border-radius: 8px;
+}
+input:focus {
+  border: none;
+}
+::placeholder {
+  font-size: 14px;
+}
+.searchBar img {
+  position: relative;
+  left: 25px;
+  z-index: 99;
+  width: 14px;
+  height: 14px;
 }
 </style>
