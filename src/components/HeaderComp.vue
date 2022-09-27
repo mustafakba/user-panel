@@ -73,10 +73,18 @@ export default {
       };
     },
   },
+  watch: {
+    searchText: function (newVal) {
+      if (newVal == "" || newVal == null) {
+        this.$store.dispatch("fetchMovies");
+      }
+      console.log(newVal);
+    },
+  },
   methods: {
     changeText() {
       this.isSubmit = true;
-      this.$store.dispatch("getMovies", {
+      this.$store.dispatch("searchMovies", {
         text: this.searchText,
         changeSubmitStatus: this.isSubmit,
       });

@@ -28,7 +28,7 @@ export default {
   computed: {
     movie: {
       get() {
-        return this.$store.getters.getMovies;
+        return this.$store.state.movies;
       },
       set() {},
     },

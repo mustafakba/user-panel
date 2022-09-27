@@ -15,7 +15,7 @@ export default {
   created() {
     this.$store.dispatch("initAuth");
     this.$store.dispatch("fetchMovies");
-    this.$store.dispatch("getMovies");
+    // this.$store.dispatch("getMovies");
   },
 };
 </script>
