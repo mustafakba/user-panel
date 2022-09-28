@@ -15,6 +15,7 @@ export default {
   created() {
     this.$store.dispatch("initAuth");
     this.$store.dispatch("fetchMovies");
+    this.$store.dispatch("filterState");
     // this.$store.dispatch("getMovies");
   },
 };
