@@ -67,8 +67,10 @@ img {
   object-fit: cover;
   transition: all 0.2s ease-in-out;
   display: block; */
+  border-radius: 6px;
   transition: all 0.2s ease-in-out;
-  height: 400px;
+  min-height: 400px;
+  max-height: 400px;
   width: 280px;
   display: block;
   height: auto;

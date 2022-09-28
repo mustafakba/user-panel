@@ -10,6 +10,7 @@ const store = new Vuex.Store({
     token: "",
     api_key: '2729e73997835bd6e2369217e8f102b1',
     movies: [],
+    isSubmit : false ,
   },
   mutations: {
     setToken(state, token) {
@@ -20,6 +21,8 @@ const store = new Vuex.Store({
     },
     setMovies(state, payload){
       state.movies = payload;
+      console.log(payload)
+      console.log(state.movies)
     },
   },
   actions: {
@@ -68,16 +71,57 @@ const store = new Vuex.Store({
       commit("clearToken")
       localStorage.removeItem("token")
     },
-        fetchMovies({state, commit}){
-      fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${state.api_key}&language=tr-TR&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`)
+    fetchMovies({state, commit}){
+      return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${state.api_key}&l anguage=tr-TR&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`)
+        .then(data => data.json())
+        .then(data => {
+          console.log("fetchMovies then bloğu")
+          commit('setMovies', data.results);
+        }).catch(err=>{
+          console.log('FetchMovies',err)
+        })
+    },
+    searchMovies({ state,commit},payload){
+      let config=payload;
+      console.log(config)
+      if(config.text==null || config.text == ''){
+        console.log('config.text')
+        state.isSubmit = false;
+        return
+      }
+      fetch(`https://api.themoviedb.org/3/search/multi?api_key=${state.api_key}&query=${config.text}`)
         .then(data => data.json())
         .then(data => {
           commit('setMovies', data.results);
         })
+        if(payload.text==null){
+          console.log("arama kısmı boş olmamalı")
+        }
+        state.isSubmit = true;
     },
+
+
     fetchMovie({state}, id){
       return fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${state.api_key}&language=tr-TR`)
         .then(data => data.json())
+    },
+    filterState({state,commit,dispatch},payload){
+      console.log("2 kere")
+      let lang = payload 
+      dispatch("fetchMovies").then(()=>{
+        
+        let mapItem = state.movies 
+        console.log('mapItem', mapItem)
+        let newArr = mapItem.filter((movie)=>{
+          console.log(movie.original_language)
+        if(movie.original_language == lang ){
+          return movie
+        }
+        })
+        commit('setMovies',newArr)
+      })
+      
+      
     }
 
   },
@@ -85,11 +129,8 @@ const store = new Vuex.Store({
     isAuthenticated(state){
         return state.token !== ""
     },
-    getMovies(state){
-      return state.movies;
-    },
-    
   },
 });
 
 export default store;
+

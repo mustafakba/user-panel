@@ -19,6 +19,9 @@
       <div class="MovieDetail-desc">
         <p>{{ movie.overview }}</p>
       </div>
+      <div class="MovieDetail-desc2">
+        <p>Vote Count :{{ movie.vote_count }}</p>
+      </div>
     </div>
   </div>
 </template>
