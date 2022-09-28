@@ -28,16 +28,53 @@
           >
             <img src="../../src/img/searchIcon.svg" alt="" />
             <input
-              @input="changeText"
+              v-on:keyup.enter="changeText"
               type="text"
               v-model="searchText"
               placeholder="Search Movie , Actor"
             />
           </div>
         </div>
-        <li
-          class="nav-item d-flex align-items-center justify-content-center"
-        ></li>
+        <div>
+          <b-button
+            id="show-btn"
+            class="ms-1 bg-dark"
+            :class="logoutClass"
+            @click="$bvModal.show('bv-modal-example')"
+            >Filtrele</b-button
+          >
+
+          <b-modal id="bv-modal-example" hide-footer>
+            <template #modal-title>
+              Görüntülemek İstediğiniz Dili Seçiniz
+            </template>
+            <div class="d-block text-center">
+              <b-form-input
+                v-model="selectedLanguage"
+                list="my-list-id"
+              ></b-form-input>
+
+              <datalist class="bg-dark" id="my-list-id">
+                <option
+                  class="blockInput"
+                  v-for="(language, index) in languages"
+                  :key="index"
+                >
+                  {{ language }}
+                </option>
+              </datalist>
+            </div>
+            <b-button
+              variant="light"
+              class="mt-3"
+              block
+              value="readonly"
+              @click="$bvModal.hide('bv-modal-example'), sendLanguage()"
+              >Filtrele</b-button
+            >
+            {{ this.selectedLanguage }}
+          </b-modal>
+        </div>
       </ul>
       <ul class="navbar-nav my-lg-0 ms-auto">
         <li class="nav-item mx-3">
@@ -68,6 +105,8 @@ export default {
       searchText: null,
       language: null,
       isSubmit: false,
+      languages: ["TR", "EN", "DEU"],
+      selectedLanguage: null,
     };
   },
   computed: {
@@ -86,6 +125,9 @@ export default {
     },
   },
   methods: {
+    sendLanguage() {
+      this.$store.dispatch("filterState", this.selectedLanguage);
+    },
     changeText() {
       this.isSubmit = true;
       this.$store.dispatch("searchMovies", {
@@ -127,7 +169,10 @@ export default {
   height: 35px;
   /* position: absolute; */
 }
-
+.block-input input {
+  user-select: none;
+  readonly: readonly;
+}
 input {
   padding: 0px 30px;
   border: none;

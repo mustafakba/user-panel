@@ -21,6 +21,8 @@ const store = new Vuex.Store({
     },
     setMovies(state, payload){
       state.movies = payload;
+      console.log(payload)
+      console.log(state.movies)
     },
   },
   actions: {
@@ -70,9 +72,10 @@ const store = new Vuex.Store({
       localStorage.removeItem("token")
     },
     fetchMovies({state, commit}){
-      fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${state.api_key}&language=tr-TR&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`)
+      return fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${state.api_key}&l anguage=tr-TR&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_watch_monetization_types=flatrate`)
         .then(data => data.json())
         .then(data => {
+          console.log("fetchMovies then bloğu")
           commit('setMovies', data.results);
         }).catch(err=>{
           console.log('FetchMovies',err)
@@ -102,16 +105,23 @@ const store = new Vuex.Store({
       return fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${state.api_key}&language=tr-TR`)
         .then(data => data.json())
     },
-    filterState({state,commit}){
-      let mapItem = state.movies 
-      console.log('mapItem', mapItem)
-      let newArr = mapItem.filter((movie)=>{
-      if(movie.vote_average>=7){
-        return movie
-      }
+    filterState({state,commit,dispatch},payload){
+      console.log("2 kere")
+      let lang = payload 
+      dispatch("fetchMovies").then(()=>{
+        
+        let mapItem = state.movies 
+        console.log('mapItem', mapItem)
+        let newArr = mapItem.filter((movie)=>{
+          console.log(movie.original_language)
+        if(movie.original_language == lang ){
+          return movie
+        }
+        })
+        commit('setMovies',newArr)
       })
-      commit('setMovies',newArr)
-      console.log(newArr)
+      
+      
     }
 
   },
