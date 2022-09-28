@@ -5,7 +5,7 @@
     <div class="container d-flex align-items-center justify-content-center">
       <div class="row">
         <MovieCard
-          class="col-sm-6 col-md-6 col-lg-4 col-sm-6-mx-2 p-5 card-height"
+          class="col-md-6 col-lg-4 col-sm-6-mx-2 p-5 card-height align-items-center justify-content-center"
           :movie="item"
           v-for="(item, index) in movie"
           :key="index"

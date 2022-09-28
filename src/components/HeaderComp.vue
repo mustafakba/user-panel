@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-primary shadow px-5">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-secondary shadow px-5">
     <a class="navbar-brand" href="#">Ubit </a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
@@ -21,6 +21,7 @@
         <div
           @submit.prevent
           class="nav-item searchBar d-flex align-items-center justify-content-center"
+          :class="logoutClass"
         >
           <div
             class="search-svg d-flex align-items-center justify-content-center"
@@ -34,6 +35,9 @@
             />
           </div>
         </div>
+        <li
+          class="nav-item d-flex align-items-center justify-content-center"
+        ></li>
       </ul>
       <ul class="navbar-nav my-lg-0 ms-auto">
         <li class="nav-item mx-3">
@@ -113,25 +117,31 @@ export default {
   color: #fff;
   background: transparent;
 }
+
 .selectLang select option {
   background: #000;
 }
+
 .searchBar input {
   width: 300px;
   height: 35px;
   /* position: absolute; */
 }
+
 input {
   padding: 0px 30px;
   border: none;
   border-radius: 8px;
 }
+
 input:focus {
   border: none;
 }
+
 ::placeholder {
   font-size: 14px;
 }
+
 .searchBar img {
   position: relative;
   left: 25px;
