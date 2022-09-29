@@ -107,21 +107,34 @@ const store = new Vuex.Store({
     },
     filterState({state,commit,dispatch},payload){
       console.log("2 kere")
-      let lang = payload 
+      let lang = payload
       dispatch("fetchMovies").then(()=>{
-        
+
         let mapItem = state.movies 
         console.log('mapItem', mapItem)
         let newArr = mapItem.filter((movie)=>{
           console.log(movie.original_language)
-        if(movie.original_language == lang ){
+        if(movie.original_language == lang ) {
           return movie
         }
+
         })
         commit('setMovies',newArr)
       })
-      
-      
+
+    },
+    filterMovieRange({state},payload){
+      let score = payload
+      let setRange = state.movies
+      console.log(setRange)
+      console.log('selam dünya')
+      let NewArr2 = setRange.filter((movie)=>{
+        if(movie.vote_average < score ){
+          return movie
+        }
+      })
+      console.log(NewArr2 , 'NewArr2 çalıştı')
+      state.movies = NewArr2
     }
 
   },
