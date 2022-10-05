@@ -11,6 +11,8 @@ const store = new Vuex.Store({
     api_key: '2729e73997835bd6e2369217e8f102b1',
     movies: [],
     isSubmit : false ,
+
+    //DATABASE Adresi "https://developers.themoviedb.org/3/search/search-movies"
   },
   mutations: {
     setToken(state, token) {
@@ -49,6 +51,7 @@ const store = new Vuex.Store({
           .then((response) => {
               commit("setToken",response.data.idToken)
               console.log("Kullanici üye kaydı oluşturuldu.")
+            router.push('/home')
           });
       },
 
