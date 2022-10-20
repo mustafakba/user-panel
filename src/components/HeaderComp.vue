@@ -8,16 +8,7 @@
             {{ $t("message.home") }}
           </router-link>
         </li>
-        <li class="nav-item">
-          <router-link
-            class="nav-link"
-            :class="logoutClass"
-            to="/about"
-            tag="a"
-          >
-            {{ $t("message.about") }}
-          </router-link>
-        </li>
+        <li class="nav-item"></li>
         <div
           @submit.prevent
           class="nav-item searchBar d-flex align-items-center justify-content-center"
@@ -36,14 +27,6 @@
           </div>
         </div>
         <div>
-          <b-button
-            id="show-btn"
-            class="ms-1 bg-dark"
-            :class="logoutClass"
-            @click="$bvModal.show('bv-modal-example')"
-            >Filtrele</b-button
-          >
-
           <b-modal id="bv-modal-example" hide-footer>
             <template #modal-title>
               Görüntülemek İstediğiniz Dili Seçiniz
