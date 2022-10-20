@@ -31,6 +31,7 @@ export const router = new VueRouter({
             beforeEnter(to,from,next){
                 if(store.getters.isAuthenticated){
                     next()
+                    
                 }
                 else{
                     next("/")
