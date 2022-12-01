@@ -5,6 +5,13 @@
 # Login & Sign Up - Movie App
 Login ve Sign Up işlemleri yapılarak movie uygulamasi  
 
+## Demo Girişi İçin 
+```
+  email : userdeneme@hotmail.com  
+  password : 123456
+  
+```
+
 ## Project setup
 ```
 npm install
